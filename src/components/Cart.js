@@ -2,9 +2,12 @@ import { useDispatch, useSelector } from "react-redux";
 import ItemList from "./ItemList";
 import { clearCart } from "../utils/cartSlice";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Cart = ()=>{
+    useEffect(()=>{
+        window.scrollTo(0, 0)
+    }, [])
     const [showPopup, setShowPopup] = useState(false);
     const handleCheckout = () => {
 

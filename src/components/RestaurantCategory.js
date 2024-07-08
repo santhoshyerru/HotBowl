@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ItemList from "./ItemList";
 
 const RestaurantCategory = ({data, showItems, setShowIndex})=>{
@@ -6,7 +6,7 @@ const RestaurantCategory = ({data, showItems, setShowIndex})=>{
     const handleClick = ()=>{
         setShowIndex(!showItems);
     }
-    
+
     return (<div>
         <div className="w-9/12  m-auto my-4 bg-gray-50 shadow-lg p-4 ">
         <div className="flex justify-between cursor-pointer" onClick={handleClick}>

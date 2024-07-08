@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 import Shimmer from "./Shimmer";
 import RestaurantCategory from "./RestaurantCategory";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import greenstar from "../Assests/greenstar.png";
 const RestaurantMenu = ()=>{
     const [showIndex, setShowIndex] = useState(null);
@@ -12,6 +12,9 @@ const RestaurantMenu = ()=>{
     if(resInfo === null){
         return <Shimmer />
     }
+    useEffect(()=>{
+        window.scrollTo(0, 0)
+    }, [])
     console.log(resInfo?.cards[2]?.card.card.info);
     const { name,
         avgRating,

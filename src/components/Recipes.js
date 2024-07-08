@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { RES_LOGO } from '../utils/constants';
 
@@ -7,7 +7,7 @@ const Recipes = (props) =>{
     // console.log(resData)
     const { imageId } = resObj;
     const navigate = useNavigate();
-
+  
     const handleClick = () => {
       // Use navigate to go to the new route with state
       const link = resObj?.action?.link

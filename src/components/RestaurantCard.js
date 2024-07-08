@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { CDN_URL, RES_LOGO, STAR_ICON_URL } from "../utils/constants";
+import { useEffect } from "react";
 
 const RestaurantCard = ({resObj}) => {
     const { name, cuisines, avgRatingString, cloudinaryImageId, costForTwo } = resObj?.info;

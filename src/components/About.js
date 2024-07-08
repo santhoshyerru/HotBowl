@@ -1,4 +1,9 @@
+import { useEffect } from "react";
+
 const About = () => {
+    useEffect(()=>{
+        window.scrollTo(0, 0)
+    }, [])
     return (
         <div className="lg:mx-[10%] p-3 my-36 flex items-center justify-center text-center">
            
@@ -11,7 +16,7 @@ const About = () => {
                 />
                 <div className='text-center mt-2'>
                     <div className='font-bold'>Santhosh Yerru</div>
-                    <div>University of Cincinnati</div>
+                    <div>Web Developer</div>
                     <div>Cincinnati, OH</div>
                 </div>
                 <div className="flex items-center justify-center mt-3">

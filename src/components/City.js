@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 // import { FaXmark } from "react-icons/fa6";
 import { FaMap } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
@@ -9,7 +9,7 @@ const City = ({handleVisible, X}) => {
 
     const [searchLocation, setSearchLocation] = useState([])
     const dispatch = useDispatch();
-
+  
     function debounce(func, delay = 500){
         let timer;
         return function(){

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const Contact = () => {
     const [showPopup, setShowPopup] = useState(false);
@@ -8,7 +8,9 @@ const Contact = () => {
         setShowPopup(true);
         setTimeout(() => setShowPopup(false), 3000); // Hide popup after 3 seconds
     };
-
+    useEffect(()=>{
+        window.scrollTo(0, 0)
+    }, [])
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100">
             <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">

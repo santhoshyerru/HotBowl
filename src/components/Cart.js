@@ -2,8 +2,19 @@ import { useDispatch, useSelector } from "react-redux";
 import ItemList from "./ItemList";
 import { clearCart } from "../utils/cartSlice";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const Cart = ()=>{
+    const [showPopup, setShowPopup] = useState(false);
+    const handleCheckout = () => {
+
+        setShowPopup(true);
+        console.log("show popup");
+        setTimeout(() => {
+            setShowPopup(false) 
+            handleClear()}, 5000); // Hide popup after 3 seconds
+    };
+
     const dispatch = useDispatch();
     const handleClear = ()=>{
         dispatch(clearCart());
@@ -16,7 +27,7 @@ const Cart = ()=>{
     },0)
     }
 
-    if(cartItems.length === 0) {
+    if(cartItems.length === 0 && !showPopup) {
         return (
             <div className="m-4 p-4 text-center  md:my-48">
                 <h1 className="text-2xl font-bold text-gray-700">Your cart is empty</h1>
@@ -37,8 +48,6 @@ const Cart = ()=>{
                 {cartItems.length ===0 && <h1>We know you are hungry but cart is empty!</h1>}
                 <ItemList items={cartItems} />
             </div>
-            
-
         </div>
         <div className="m-auto w-3/12">
             {cartItems.length >0 &&
@@ -74,11 +83,19 @@ const Cart = ()=>{
                                 </div>
                                 <button
                                     className="relative w-full h-10 border-2 my-6 border-green-500 border-collapse text-black font-bold overflow-hidden bg-white rounded-lg transition-all duration-400 ease-in-out shadow-md hover:scale-105 hover:text-white hover:shadow-lg active:scale-90 before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-green-500 before:to-green-300 before:transition-all before:duration-500 before:ease-in-out before:z-[-1] before:rounded-md hover:before:left-0"
-                                    onClick={handleClear}
+                                    onClick={handleCheckout}
                                 >
                                 Proceed to Checkout!
                                 </button>
             </div>}
+            {showPopup && (
+                    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                        <div className="bg-white p-6 rounded-lg shadow-lg">
+                            <h2 className="text-xl font-bold mb-2">Thanks For Ordering with us</h2>
+                            <p>You will receive the food shortly. You can pay to the HotBowler!</p>
+                        </div>
+                    </div>
+                )}
         </div>
          </div>
         )

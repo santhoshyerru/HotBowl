@@ -1,5 +1,5 @@
 {
-  "homepage": "http://santhoshyerru.github.io/HotBowl1"
+  "homepage": "http://santhoshyerru.github.io/HotBowl1",
   "name": "namaste-react",
   "version": "1.0.0",
   "description": "This is santhosh's react app",
@@ -8,7 +8,7 @@
     "build": "parcel build index.html",
     "test": "jest",
     "watch-test": "jest --watch",
-    "predeploy": "npm run build",
+    "predeploy": "npm run build",,
     "deploy": "gh-pages -d build"
   },
   "repository": {

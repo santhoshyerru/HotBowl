@@ -45,34 +45,7 @@ const Body = () => {
             }, delay)
         }
     }
-    const getData = () => {
-        // Handle visibility
-        let resContainerVisibility, footerDataVisibility, notAtPageBottom;
-        if (resContainerRef.current) {
-          const { top, bottom } = resContainerRef.current.getBoundingClientRect();
-          const windowHeight = window.innerHeight;
-          resContainerVisibility = top < windowHeight && bottom >= 120;
-        }
-        if (footerDataRef.current) {
-          const { top, bottom } = footerDataRef.current.getBoundingClientRect();
-          const windowHeight = window.innerHeight;
-          footerDataVisibility = top < windowHeight && bottom >= 0;
-          
-        }
-        const windowHeight = window.innerHeight;
-        const fullHeight = document.documentElement.scrollHeight;
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-        notAtPageBottom = (windowHeight + scrollTop) < fullHeight;
-        const apiCall = resContainerVisibility && footerDataVisibility && notAtPageBottom;
-        setMakeApiCall(apiCall);
-        if (apiCall) {
-          postData();
-          console.log("post call")
-        }
-      };
-   
     const postData = async () =>{
-        
         try{
             console.log("in post call")
         const url = "https://coder-food-server-imnaval.vercel.app/api/swiggy/update"
@@ -89,7 +62,6 @@ const Body = () => {
 
         const json = await data.json();
         console.log(json);
-      
         payload.widgetOffset.collectionV5RestaurantListWidget_SimRestoRelevance_food_seo = json?.data?.pageOffset?.widgetOffset?.collectionV5RestaurantListWidget_SimRestoRelevance_food_seo;
         setResList(prev => [...prev, ...(json?.data?.cards[0]?.card?.card?.gridElements?.infoWithStyle?.restaurants)])
         setFilteredResList(prev => [...prev, ...(json?.data?.cards[0]?.card?.card?.gridElements?.infoWithStyle?.restaurants)])
@@ -99,16 +71,33 @@ const Body = () => {
             setMakeApiCall(false);
         }
     }
+    const getData = () => {
+        // Handle visibility
+        let resContainerVisibility, footerDataVisibility, notAtPageBottom;
+        if (resContainerRef.current) {
+          const { top, bottom } = resContainerRef.current.getBoundingClientRect();
+          const windowHeight = window.innerHeight;
+          resContainerVisibility = top < windowHeight && bottom >= 120;
+        }
+        if (footerDataRef.current) {
+          const { top, bottom } = footerDataRef.current.getBoundingClientRect();
+          const windowHeight = window.innerHeight;
+          footerDataVisibility = top < windowHeight && bottom >= 0;
+        }
+        const windowHeight = window.innerHeight;
+        const fullHeight = document.documentElement.scrollHeight;
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        notAtPageBottom = (windowHeight + scrollTop) < fullHeight;
+        const apiCall = resContainerVisibility && footerDataVisibility && notAtPageBottom;
+        setMakeApiCall(apiCall);
+        if (apiCall) {
+          postData();
+        }
+      };
+  
     const scrollHandler = debounce(getData)
-    useEffect(()=>{
-        window.scrollTo(0, 0)
-        fetchData();
-        window.addEventListener('scroll', scrollHandler)
-        return () => window.removeEventListener('scroll', scrollHandler)
-    }, [userLocation])
-    fetchData = async () => {
+   const fetchData = async () => {
         // const response = await fetch(RESTAURANTS_URL);
-        
         const response = await fetch(`${SERVER_URL}/api/swiggy/getData?lat=${latitude}&lng=${longitude}`)
 
         const json = await response.json();
@@ -123,6 +112,13 @@ const Body = () => {
         setTopRestaurantChain(json?.data?.cards[1]?.card?.card.gridElements?.infoWithStyle?.restaurants)
         setRecipes(json?.data?.cards[0]?.card?.card?.imageGridCards?.info)
     }
+    useEffect(()=>{
+        window.scrollTo(0, 0)
+        fetchData();
+        window.addEventListener('scroll', scrollHandler)
+        return () => window.removeEventListener('scroll', scrollHandler)
+    }, [userLocation])
+   
     if(!isOnline){
         return <h1>Please Check your internet connection!!!</h1>
     }

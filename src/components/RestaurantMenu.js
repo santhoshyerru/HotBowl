@@ -12,9 +12,7 @@ const RestaurantMenu = ()=>{
     if(resInfo === null){
         return <Shimmer />
     }
-    useEffect(()=>{
-        window.scrollTo(0, 0)
-    }, [])
+   
     console.log(resInfo?.cards[2]?.card.card.info);
     const { name,
         avgRating,

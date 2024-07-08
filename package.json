@@ -1,4 +1,5 @@
 {
+  "homepage": "http://santhoshyerru.github.io/HotBowl1"
   "name": "namaste-react",
   "version": "1.0.0",
   "description": "This is santhosh's react app",
@@ -6,7 +7,9 @@
     "start": "parcel index.html",
     "build": "parcel build index.html",
     "test": "jest",
-    "watch-test": "jest --watch"
+    "watch-test": "jest --watch",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "repository": {
     "type": "git",
@@ -18,7 +21,6 @@
   "bugs": {
     "url": "https://github.com/santhoshyerru/react-learnings-santhosh/issues"
   },
-  "homepage": "https://github.com/santhoshyerru/react-learnings-santhosh#readme",
   "devDependencies": {
     "@babel/core": "^7.24.7",
     "@babel/preset-env": "^7.24.7",
@@ -28,6 +30,7 @@
     "@testing-library/jest-dom": "^6.4.6",
     "@testing-library/react": "^16.0.0",
     "babel-jest": "^29.7.0",
+    "gh-pages": "^6.1.1",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "parcel": "^2.12.0",
